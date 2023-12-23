@@ -39,7 +39,7 @@ function update() {
   if (ballPosition.x + BALL_LENGTH > canvas.width) {
     ballIsReversed.x = true;
   }
-  if (ballPosition.y + BALL_LENGTH > canvas.height) {
+  if (ballPosition.y + BALL_LENGTH> canvas.height) {
     ballIsReversed.y = true;
   }
 
@@ -54,6 +54,8 @@ function update() {
 }
 
 function start() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
   lastTime = Date.now();
   gameInterval = setInterval(update, 1000 / FPS);
 }
@@ -65,3 +67,7 @@ function stop() {
 }
 
 window.onload = start;
+window.onresize = () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}

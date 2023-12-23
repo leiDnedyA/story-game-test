@@ -1,6 +1,6 @@
-const FPS = 20;
-const BALL_SPEED = .05;
-const BALL_LENGTH = 10;
+import ballScreen from "./screens/BallScreen.ts";
+
+const FPS = 144;
 
 const canvas = document.querySelector('#game-canvas');
 const ctx = canvas.getContext('2d');
@@ -9,54 +9,37 @@ let gameInterval: number | null = null;
 let lastTime = 0;
 let deltaTime = 0;
 
-let ballPosition = {
-  x: 0,
-  y: 0
-};
+const screenStack = [];
 
-let ballIsReversed = {
-  x: false,
-  y: false
+function adjustCanvasSize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 }
 
 function render() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = 'black';
-  ctx.fillRect(ballPosition.x, ballPosition.y, BALL_LENGTH, BALL_LENGTH);
+  for (const screen of screenStack) {
+    screen.render(ctx, canvas);
+  }
 }
+
 
 function update() {
   const now = Date.now();
   deltaTime = now - lastTime;
   lastTime = now;
 
-  const xSpeed = ballIsReversed.x ? -BALL_SPEED : BALL_SPEED;
-  const ySpeed = ballIsReversed.y ? -BALL_SPEED : BALL_SPEED;
-  
-  ballPosition.x += xSpeed * deltaTime;
-  ballPosition.y += ySpeed * deltaTime;
-
-  if (ballPosition.x + BALL_LENGTH > canvas.width) {
-    ballIsReversed.x = true;
-  }
-  if (ballPosition.y + BALL_LENGTH> canvas.height) {
-    ballIsReversed.y = true;
-  }
-
-  if (ballPosition.x < 0) {
-    ballIsReversed.x = false;
-  }
-  if (ballPosition.y < 0) {
-    ballIsReversed.y = false;
+  for (const screen of screenStack) {
+    screen.update(deltaTime, canvas);
   }
 
   render();
 }
 
 function start() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  adjustCanvasSize();
   lastTime = Date.now();
+  screenStack.push(ballScreen);
   gameInterval = setInterval(update, 1000 / FPS);
 }
 
@@ -67,7 +50,4 @@ function stop() {
 }
 
 window.onload = start;
-window.onresize = () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
+window.onresize = adjustCanvasSize;

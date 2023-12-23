@@ -1,6 +1,11 @@
+
+type UpdateFunc = (deltaTime: number, canvas: HTMLCanvasElement) => void;
+
+type RenderFunc = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => void;
+
 type Screen = {
-  update: (deltaTime: number, canvas) => void;
-  render: (ctx, canvas) => void;
+  update: UpdateFunc;
+  render: RenderFunc;
 }
 
-export default Screen;
+export type {Screen, UpdateFunc, RenderFunc};

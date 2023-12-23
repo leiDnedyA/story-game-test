@@ -1,4 +1,4 @@
-import Screen from 'screen';
+import {Screen} from './Screen';
 
 const BALL_SPEED = .2;
 const BALL_LENGTH = 30;
@@ -13,7 +13,7 @@ let ballIsReversed = {
   y: false
 }
 
-function render(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
+function render(ctx: CanvasRenderingContext2D) {
   ctx.fillStyle = 'black';
   ctx.fillRect(ballPosition.x, ballPosition.y, BALL_LENGTH, BALL_LENGTH);
 }

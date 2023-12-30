@@ -1,6 +1,6 @@
 import { Screen } from "./screens/Screen.ts";
-import ballScreen from "./screens/BallScreen.ts";
 import dialogueBoxScreen from "./screens/DialogueBoxScreen.ts";
+import overworldScreen from "./screens/OverworldScreen.ts";
 
 const FPS = 144;
 
@@ -43,11 +43,10 @@ function update() {
 function start() {
   adjustCanvasSize();
   lastTime = Date.now();
-  if (dialogueBoxScreen.init !== undefined) {
-    dialogueBoxScreen.init({ text: "Hello world :)" });
+  if (overworldScreen.init) {
+    overworldScreen.init();
   }
-  screenStack.push(ballScreen);
-  screenStack.push(dialogueBoxScreen);
+  screenStack.push(overworldScreen);
   gameInterval = setInterval(update, 1000 / FPS);
 }
 

@@ -1,5 +1,10 @@
 import {Screen} from './Screen.ts';
 
+const PLAYER_SPEED = 1;
+
+const PLAYER_WIDTH = 30;
+const PLAYER_HEIGHT = 30;
+
 const playerPos = {
     x: 0,
     y: 0
@@ -29,11 +34,23 @@ function handleKeyup(e: KeyboardEvent) {
 }
 
 function update(deltaTime: number, canvas: HTMLCanvasElement) {
-
+    if (keysDown.W === true) {
+        playerPos.y -= PLAYER_SPEED * deltaTime;
+    }
+    if (keysDown.S === true) {
+        playerPos.y += PLAYER_SPEED * deltaTime;
+    }
+    if (keysDown.A === true) {
+        playerPos.x -= PLAYER_SPEED * deltaTime;
+    }
+    if (keysDown.D === true) {
+        playerPos.x += PLAYER_SPEED * deltaTime;
+    }
 }
 
 function render(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
-
+    ctx.fillStyle = 'blue';
+    ctx.fillRect(playerPos.x, playerPos.y, PLAYER_WIDTH, PLAYER_HEIGHT);
 }
 
 function init() {

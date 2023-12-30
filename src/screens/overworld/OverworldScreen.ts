@@ -16,12 +16,34 @@ const player: GameObject = {
 };
 
 const npc: GameObject = {
-  x: 0,
-  y: 0,
+  x: 200,
+  y: 200,
   color: "#c9c",
   width: PLAYER_WIDTH,
   height: PLAYER_HEIGHT,
-  speed: PLAYER_SPEED,
+  speed: 0.05,
+  xDirection: 1,
+  yDirection: 1,
+  lastDirChange: 0,
+  dirChangeInterval: 500,
+  update: function (deltaTime: number) {
+    const now = Date.now();
+    if (now - this.lastDirChange > this.dirChangeInterval) {
+      this.lastDirChange = now;
+      if (Math.random() > 0.9) {
+        this.xDirection = randomDirection();
+      }
+      if (Math.random() > 0.9) {
+        this.yDirection = randomDirection();
+      }
+      if (Math.random() > 0.6) {
+        this.xDirection = 0;
+        this.yDirection = 0;
+      }
+    }
+    this.x += this.speed * this.xDirection * deltaTime;
+    this.y += this.speed * this.yDirection * deltaTime;
+  },
 };
 
 const gameObjects = [player, npc];
@@ -32,6 +54,10 @@ const keysDown: { [key: string]: boolean } = {
   S: false,
   D: false,
 };
+
+function randomDirection() {
+  return Math.floor(Math.random() * 10) % 3;
+}
 
 function handleKeydown(e: KeyboardEvent) {
   const key = e.key.toUpperCase();
@@ -62,10 +88,10 @@ function update(deltaTime: number, canvas: HTMLCanvasElement) {
   if (keysDown.D === true) {
     player.x += PLAYER_SPEED * deltaTime;
   }
+  npc.update(deltaTime);
 }
 
 function render(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
-  ctx.fillStyle = "blue";
   overworldRender(gameObjects, ctx);
 }
 

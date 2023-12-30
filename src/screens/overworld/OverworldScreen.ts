@@ -1,4 +1,4 @@
-import {Screen} from './Screen.ts';
+import {Screen} from '../Screen.ts';
 
 const PLAYER_SPEED = 1;
 

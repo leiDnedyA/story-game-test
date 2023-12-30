@@ -2,6 +2,13 @@ import { Screen } from "./screens/Screen.ts";
 import dialogueBoxScreen from "./screens/DialogueBoxScreen.ts";
 import overworldScreen from "./screens/overworld/OverworldScreen.ts";
 
+
+/* 
+------------------------------------------------------------------------
+Constants, state, and canvas variables
+------------------------------------------------------------------------
+*/
+
 const FPS = 144;
 
 const canvas: HTMLCanvasElement = <HTMLCanvasElement>(
@@ -14,6 +21,16 @@ let lastTime = 0;
 let deltaTime = 0;
 
 const screenStack: Screen[] = [];
+
+window.onload = start;
+window.onresize = adjustCanvasSize;
+
+
+/* 
+------------------------------------------------------------------------
+Game and canvas management functions
+------------------------------------------------------------------------
+*/
 
 function adjustCanvasSize() {
   canvas.width = window.innerWidth;
@@ -55,6 +72,3 @@ function stop() {
     clearInterval(gameInterval);
   }
 }
-
-window.onload = start;
-window.onresize = adjustCanvasSize;

@@ -1,6 +1,6 @@
 import { Screen } from "./screens/Screen.ts";
 import dialogueBoxScreen from "./screens/DialogueBoxScreen.ts";
-import overworldScreen from "./screens/OverworldScreen.ts";
+import overworldScreen from "./screens/overworld/OverworldScreen.ts";
 
 const FPS = 144;
 

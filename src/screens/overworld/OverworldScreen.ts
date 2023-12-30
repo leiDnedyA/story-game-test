@@ -1,6 +1,6 @@
 import {Screen} from '../Screen.ts';
 
-const PLAYER_SPEED = 1;
+const PLAYER_SPEED = .25;
 
 const PLAYER_WIDTH = 30;
 const PLAYER_HEIGHT = 30;

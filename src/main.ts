@@ -43,6 +43,9 @@ function update() {
 function start() {
   adjustCanvasSize();
   lastTime = Date.now();
+  if (dialogueBoxScreen.init !== undefined) {
+    dialogueBoxScreen.init({ text: "Hello world :)" });
+  }
   screenStack.push(ballScreen);
   screenStack.push(dialogueBoxScreen);
   gameInterval = setInterval(update, 1000 / FPS);

@@ -13,6 +13,14 @@ let currTargetText = "Today when I walked into my economics class I saw somethin
 let currDelay = 0;
 let currBreakPoint = 0;
 
+type DialogueBoxOptions = {
+    text: string
+}
+
+function init(options: DialogueBoxOptions) {
+    currTargetText = options.text;
+}
+
 function update(deltaTime: number, canvas: HTMLCanvasElement) {
     if (currTextIndex >= currTargetText.length) {
         return;
@@ -48,7 +56,8 @@ function render(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
 
 const dialogueBoxScreen: Screen = {
     update: update,
-    render: render
+    render: render,
+    init: init,
 };
 
 export default dialogueBoxScreen;

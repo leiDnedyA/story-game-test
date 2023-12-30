@@ -6,6 +6,7 @@ type RenderFunc = (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => 
 type Screen = {
   update: UpdateFunc;
   render: RenderFunc;
+  init?: (options?: any) => void;
 }
 
 export type {Screen, UpdateFunc, RenderFunc};

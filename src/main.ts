@@ -1,5 +1,4 @@
 import { Screen } from "./screens/Screen.ts";
-import dialogueBoxScreen from "./screens/DialogueBoxScreen.ts";
 import overworldScreen from "./screens/overworld/OverworldScreen.ts";
 
 

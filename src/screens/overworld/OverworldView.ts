@@ -1,8 +1,8 @@
 import { GameObject } from "./GameObject.ts";
 
-function render(gameObjects: GameObject[], ctx: CanvasRenderingContext2D) {
-  ctx.fillStyle = "blue";
+function overworldRender(gameObjects: GameObject[], ctx: CanvasRenderingContext2D) {
   for (const gameObject of gameObjects) {
+    ctx.fillStyle = gameObject.color;
     ctx.fillRect(
       gameObject.x,
       gameObject.y,
@@ -12,4 +12,4 @@ function render(gameObjects: GameObject[], ctx: CanvasRenderingContext2D) {
   }
 }
 
-export { render };
+export { overworldRender };

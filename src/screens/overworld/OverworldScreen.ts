@@ -1,18 +1,30 @@
 import { Screen } from "../Screen.ts";
 import { GameObject } from "./GameObject.ts";
+import { overworldRender } from "./OverworldView.ts";
 
 const PLAYER_SPEED = 0.25;
-
 const PLAYER_WIDTH = 30;
 const PLAYER_HEIGHT = 30;
 
 const player: GameObject = {
   x: 0,
   y: 0,
+  color: "blue",
   width: PLAYER_WIDTH,
   height: PLAYER_HEIGHT,
   speed: PLAYER_SPEED,
 };
+
+const npc: GameObject = {
+  x: 0,
+  y: 0,
+  color: "#c9c",
+  width: PLAYER_WIDTH,
+  height: PLAYER_HEIGHT,
+  speed: PLAYER_SPEED,
+};
+
+const gameObjects = [player, npc];
 
 const keysDown: { [key: string]: boolean } = {
   W: false,
@@ -54,7 +66,7 @@ function update(deltaTime: number, canvas: HTMLCanvasElement) {
 
 function render(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
   ctx.fillStyle = "blue";
-  ctx.fillRect(player.x, player.y, player.width, player.height);
+  overworldRender(gameObjects, ctx);
 }
 
 function init() {
